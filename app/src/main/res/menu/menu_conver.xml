@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:showAsAction="always"
+    >
+    <item android:id="@+id/conver"
+        android:title="Cuộc trò chuyện"
+        />
+    <item android:id="@+id/remove"
+        android:title="Xóa"
+        />
+    <item android:id="@+id/mark"
+        android:title="Đánh dấu là chưa đọc"
+        />
+
+    <item android:id="@+id/ignore"
+        android:title="Bỏ qua"/>
+
+
+</menu>

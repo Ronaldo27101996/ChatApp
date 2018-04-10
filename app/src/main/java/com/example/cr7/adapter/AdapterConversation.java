@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.cr7.chatapp.R;
@@ -22,6 +23,19 @@ public class AdapterConversation extends RecyclerView.Adapter<AdapterConversatio
     private List<Conversation> listConversation;
     private Context context;
 
+    public List<Conversation> getListConversation() {
+        return listConversation;
+    }
+//    public interface OnItemClickListener {
+//        void onItemLongClick(View v,int pos);
+//    }
+//
+//    public interface ItemLongClickListener {
+//
+//        void onItemLongClick(View v,int pos);
+//
+//    }
+
     public AdapterConversation(List<Conversation> listConversation, Context context) {
         this.listConversation = listConversation;
         this.context = context;
@@ -32,6 +46,7 @@ public class AdapterConversation extends RecyclerView.Adapter<AdapterConversatio
         View view = LayoutInflater.from(context).inflate(R.layout.item_conversation,parent,false);
         return new ConversationViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(ConversationViewHolder holder, int position) {
@@ -47,6 +62,7 @@ public class AdapterConversation extends RecyclerView.Adapter<AdapterConversatio
         if(!conversation.isOnline()){
             holder.imgOnOff.setVisibility(View.INVISIBLE);
         }
+
     }
 
     @Override
@@ -54,7 +70,7 @@ public class AdapterConversation extends RecyclerView.Adapter<AdapterConversatio
         return listConversation.size();
     }
 
-    public class ConversationViewHolder extends RecyclerView.ViewHolder {
+    public class ConversationViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnClickListener {
         private TextView txtName,txtDate,txtLastMessage;
         private ImageView imgAvatar;
         private ImageView imgOnOff;
@@ -65,7 +81,26 @@ public class AdapterConversation extends RecyclerView.Adapter<AdapterConversatio
             txtLastMessage= itemView.findViewById(R.id.txtLastMessage);
             imgAvatar = itemView.findViewById(R.id.imgAvatar);
             imgOnOff = itemView.findViewById(R.id.imgOnOff);
+            itemView.setOnLongClickListener( this);
+            itemView.setOnClickListener( this);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            Toast.makeText(context, "LongClick"+ getListConversation().get(this.getAdapterPosition()).getName(), Toast.LENGTH_SHORT).show();
+            Conversation conversation = getListConversation().get(this.getAdapterPosition());
+            myLongClickItem(conversation);
+            return true;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    private void myLongClickItem(Conversation conversation) {
+        
     }
 }
